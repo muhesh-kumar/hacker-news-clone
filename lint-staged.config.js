@@ -1,5 +1,5 @@
 // lint-staged.config.js
-module.exports = {
+export default {
   // Type check TypeScript files
   '**/*.(ts|tsx)': () => 'yarn tsc --noEmit',
 
