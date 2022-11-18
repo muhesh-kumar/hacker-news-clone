@@ -11,6 +11,8 @@ module.exports = {
         background: '#F7FAFC',
         primaryLight: '#FFFFFF',
         primaryDark: '#F56565',
+        newsIdColor: '#6E7786',
+        newsFontColor: '#434851',
       },
     },
   },
