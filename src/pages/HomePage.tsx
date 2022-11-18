@@ -1,11 +1,11 @@
-import GeneralPageLayout from "@layouts/GeneralPageLayout"
+import GeneralPageLayout from '@layouts/GeneralPageLayout';
 
 const HomePage = () => {
   return (
     <GeneralPageLayout>
-      Home Page
+      <div>Home Page</div>
     </GeneralPageLayout>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

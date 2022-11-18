@@ -8,11 +8,11 @@ import Navbar from '@components/Navbar';
 
 const GeneralPageLayout: FC<GeneralPageLayoutProps> = ({ children }) => {
   return (
-    <div className="h-screen overflow-x-hidden rerlative font-verdana bg-background">
+    <div className="h-screen overflow-x-hidden font-openSans relative bg-primaryLight">
       <Navbar />
-      {children}
+      <div className="h-screen px-40 pt-10 bg-background">{children}</div>
     </div>
-  )
-}
+  );
+};
 
-export default GeneralPageLayout
+export default GeneralPageLayout;
