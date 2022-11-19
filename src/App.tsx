@@ -1,9 +1,5 @@
 const App = () => {
-  return (
-    <div>
-      Initial App
-    </div>
-  )
-}
+  return <div>Initial App</div>;
+};
 
-export default App
+export default App;

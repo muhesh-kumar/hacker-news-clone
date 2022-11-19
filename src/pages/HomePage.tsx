@@ -1,17 +1,17 @@
 import GeneralPageLayout from '@layouts/GeneralPageLayout';
 import NewsContainer from '@components/NewsContainer';
 
+import LoadMoreBtn from '@elements/LoadMoreBtn';
+
 const HomePage = () => {
   return (
     <GeneralPageLayout>
-      {/* <div className="grid grid-cols-3 gap-20">
-        <div className="col-span-2">
-          <NewsContainer />
+      <div className="flex flex-col gap-5 pb-10">
+        <NewsContainer />
+        <div className="flex justify-center">
+          <LoadMoreBtn />
         </div>
-        <div className="grid grid-cols px-10">login</div>
-      </div> */}
-
-      <NewsContainer />
+      </div>
     </GeneralPageLayout>
   );
 };
