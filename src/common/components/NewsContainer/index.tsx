@@ -8,9 +8,10 @@ import { APIResponse, APINewsDataType, NewsDataType } from 'types/News';
 let API_URL = '';
 
 const getNewsDataFromAPIResponse = (APINews: APIResponse) =>
-  APINews.hits.map((data: APINewsDataType) => {
+  APINews.hits.map((data: APINewsDataType, idx: number) => {
     return {
-      id: data.id,
+      // FIXME: give correct id based on currentPageNumber and totalNumberOfPages
+      id: idx + 1,
       author: data.author,
       created_at: data.created_at,
       title: data.title,
