@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import News from '@components/News';
 import { useNewsStore } from '@utils/store';
-import getNewsDataFromAPIResponse from '@utils/getNewsDataFromAPIResponse';
+import { getNewsDataFromAPIResponse } from '@utils/getDataFromAPIResponse';
 
 import { NewsDataType } from 'types/news';
 

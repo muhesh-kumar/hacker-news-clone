@@ -38,7 +38,7 @@ export const useNewsStore = create<NewsStore>((set) => ({
 
 export const useSearchStore = create<SearchStore>((set) => ({
   searchText: '',
-  searchCategory: 'stories',
+  searchCategory: 'story',
   searchByOption: 'popularity',
   searchTimeRangeOption: 'all-time',
 

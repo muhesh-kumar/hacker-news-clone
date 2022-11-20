@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { BsTriangleFill } from 'react-icons/bs';
 
-import { getTimeElapsedSinceNewsIsPosed } from '@utils/time';
+import StoryFooter from '@elements/StoryFooter';
+
 import getDomainName from '@utils/getDomainName';
 
 import { NewsDataType } from 'types/news';
@@ -11,7 +12,7 @@ type NewsPropsType = {
 };
 
 const News: FC<NewsPropsType> = ({ newsData }) => {
-  const { id, title, author, url, points, created_at, num_comments } = newsData;
+  const { id, title, url } = newsData;
   return (
     <div className="flex gap-5 px-8 py-5 rounded-md border-b-[1px] bg-primaryLight">
       <div className="flex gap-5 py-3 items-center">
@@ -32,16 +33,7 @@ const News: FC<NewsPropsType> = ({ newsData }) => {
             </a>
           )}
         </div>
-        <div className="flex gap-2 items-center font-semibold text-xs text-newsFontColor">
-          <p>{points} points by</p>
-          <p>{author}</p>
-          <p>|</p>
-          <p>{getTimeElapsedSinceNewsIsPosed(created_at)} ago</p>
-          <p>|</p>
-          <p>hide</p>
-          <p>|</p>
-          <p>{num_comments} comments</p>
-        </div>
+        <StoryFooter newsData={newsData} />
       </div>
     </div>
   );

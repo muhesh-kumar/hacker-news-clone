@@ -11,7 +11,7 @@ export type APINewsDataType = {
   children: APINewsDataType[];
 };
 
-export type APIResponse = {
+export type APINewsResponse = {
   hits: APINewsDataType[];
   nbHits: number;
   nbPages: number;

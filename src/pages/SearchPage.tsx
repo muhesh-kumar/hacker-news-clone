@@ -1,6 +1,6 @@
 import GeneralPageLayout from '@layouts/GeneralPageLayout';
 
-import NewStoriesNewsContainer from '@components/NewStoriesNewsContainer';
+import SearchPageNewsContainer from '@components/SearchPageNewsContainer';
 import Pagination from '@components/Pagination';
 
 import { useSearchStore } from '@utils/store';
@@ -38,8 +38,8 @@ const SearchPage = () => {
             value={searchCategory}
             onChange={handleChangeInSearchCategory}
           >
-            <option value="stories">Stories</option>
-            <option value="comments">Comments</option>
+            <option value="story">Stories</option>
+            <option value="comment">Comments</option>
             <option value="all">All</option>
           </select>
           <span>by</span>
@@ -65,7 +65,7 @@ const SearchPage = () => {
             <option value="all-time">Custom Range</option>
           </select>
         </form>
-        <NewStoriesNewsContainer />
+        <SearchPageNewsContainer />
         <div className="flex justify-center">
           <Pagination />
         </div>
