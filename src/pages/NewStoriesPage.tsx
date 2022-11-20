@@ -1,15 +1,15 @@
 import GeneralPageLayout from '@layouts/GeneralPageLayout';
-import NewNewsContainer from '@components/NewNewsContainer';
+import NewStoriesNewsContainer from '@components/NewStoriesNewsContainer';
 
-import LoadMoreBtn from '@elements/LoadMoreBtn';
+import Pagination from '@components/Pagination';
 
 const NewStoriesPage = () => {
   return (
     <GeneralPageLayout>
       <div className="flex flex-col gap-5 pb-10">
-        <NewNewsContainer />
+        <NewStoriesNewsContainer />
         <div className="flex justify-center">
-          <LoadMoreBtn />
+          <Pagination />
         </div>
       </div>
     </GeneralPageLayout>
