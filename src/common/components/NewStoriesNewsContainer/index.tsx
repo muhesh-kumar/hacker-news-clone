@@ -28,7 +28,6 @@ const NewStoriesNewsContainer = () => {
       const data = await response.json();
 
       if (currentPageNumber == 0) setTotalNumberOfPages(data.nbPages);
-      console.log(currentPageNumber, totalNumberOfPages, data);
 
       setNewsData(getNewsDataFromAPIResponse(data));
     };

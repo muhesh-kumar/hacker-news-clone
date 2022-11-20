@@ -27,6 +27,7 @@ const Pagination = () => {
   ) {
     pageBtns.push(
       <PageBtn
+        key={pageNumber}
         handleClick={() => goToPage(pageNumber)}
         btnText={pageNumber}
         isHighlighted={pageNumber === currentPageNumber}

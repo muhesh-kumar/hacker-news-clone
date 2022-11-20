@@ -7,11 +7,8 @@ const LoadMoreBtn = () => {
     (state) => state.setCurrentPageNumber,
   );
 
-  const handleClick = () => {
+  const handleClick = () =>
     setCurrentPageNumber((currentPageNumber + 1) % totalNumberOfPages);
-    console.log('clicked!');
-    console.log(currentPageNumber);
-  };
 
   return (
     <button

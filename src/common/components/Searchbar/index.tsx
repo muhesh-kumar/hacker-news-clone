@@ -6,10 +6,8 @@ const Searchbar = () => {
   const searchText = useSearchStore((state) => state.searchText);
   const setSearchText = useSearchStore((state) => state.setSearchText);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchText(e.target.value);
-    console.log(searchText);
-  };
 
   return (
     <div className="border-[1px] border-primaryDark w-[65%] rounded-md flex gap-3 items-center px-5 bg-white">
