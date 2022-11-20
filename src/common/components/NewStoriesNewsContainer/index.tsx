@@ -6,7 +6,7 @@ import { useNewsStore } from '@utils/store';
 import getNewsDataFromAPIResponse from '@utils/getNewsDataFromAPIResponse';
 import { getCurrentTimeInSeconds } from '@utils/time';
 
-import { NewsDataType } from 'types/News';
+import { NewsDataType } from 'types/news';
 
 const NewStoriesNewsContainer = () => {
   const currentPageNumber = useNewsStore((state) => state.currentPageNumber);

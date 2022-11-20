@@ -1,4 +1,4 @@
-import { APIResponse, APINewsDataType } from 'types/News';
+import { APIResponse, APINewsDataType } from 'types/news';
 
 export default (APINews: APIResponse) =>
   APINews.hits.map((data: APINewsDataType, idx: number) => {

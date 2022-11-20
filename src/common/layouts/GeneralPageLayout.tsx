@@ -1,12 +1,10 @@
-import { ReactNode, FC } from 'react';
-
-type GeneralPageLayoutProps = {
-  children: ReactNode;
-};
+import { FC } from 'react';
 
 import Navbar from '@components/Navbar';
 
-const GeneralPageLayout: FC<GeneralPageLayoutProps> = ({ children }) => {
+import { PageLayoutProps } from 'types/layout';
+
+const GeneralPageLayout: FC<PageLayoutProps> = ({ children }) => {
   return (
     <div className="h-screen overflow-x-hidden font-openSans relative bg-primaryLight">
       <Navbar />

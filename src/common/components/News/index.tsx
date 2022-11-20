@@ -4,7 +4,7 @@ import { BsTriangleFill } from 'react-icons/bs';
 import { getTimeElapsedSinceNewsIsPosed } from '@utils/time';
 import getDomainName from '@utils/getDomainName';
 
-import { NewsDataType } from 'types/News';
+import { NewsDataType } from 'types/news';
 
 type NewsPropsType = {
   newsData: NewsDataType;
