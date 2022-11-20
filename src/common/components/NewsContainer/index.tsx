@@ -32,11 +32,11 @@ const NewsContainer = () => {
 
   // All stories that are on the front/home page right now
   if (currentPageNumber == 0)
-    API_URL = 'http://hn.algolia.com/api/v1/search?tags=front_page';
+    API_URL = 'https://hn.algolia.com/api/v1/search?tags=front_page';
 
   // Last stories
   if (currentPageNumber > 0)
-    API_URL = `http://hn.algolia.com/api/v1/search_by_date?tags=story&page=${currentPageNumber}`;
+    API_URL = `https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${currentPageNumber}`;
 
   console.log(currentPageNumber, totalNumberOfPages, API_URL);
 
