@@ -1,3 +1,13 @@
+export type NewsDataType = {
+  id: number;
+  created_at: string;
+  title: string;
+  author: string;
+  url: string;
+  points: number;
+  num_comments: number;
+};
+
 export type APINewsDataType = {
   id: number;
   created_at: string;
@@ -32,14 +42,4 @@ export type APINewsResponse = {
     };
     total: number;
   };
-};
-
-export type NewsDataType = {
-  id: number;
-  created_at: string;
-  title: string;
-  author: string;
-  url: string;
-  points: number;
-  num_comments: number;
 };

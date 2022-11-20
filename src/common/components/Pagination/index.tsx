@@ -1,4 +1,5 @@
 import PageBtn from '@elements/PageBtn';
+import PageBtns from './PageBtns';
 
 import { useNewsStore } from '@utils/store';
 
@@ -17,28 +18,12 @@ const Pagination = () => {
       Math.min(totalNumberOfPages - 1, currentPageNumber + 1),
     );
 
-  const goToPage = (pageNumber: number) => setCurrentPageNumber(pageNumber);
-
-  const pageBtns = [];
-  for (
-    let pageNumber = currentPageNumber;
-    pageNumber <= Math.min(totalNumberOfPages - 1, currentPageNumber + 4);
-    pageNumber++
-  ) {
-    pageBtns.push(
-      <PageBtn
-        key={pageNumber}
-        handleClick={() => goToPage(pageNumber)}
-        btnText={pageNumber}
-        isHighlighted={pageNumber === currentPageNumber}
-      />,
-    );
-  }
-
   return (
     <div className="flex gap-3">
-      <PageBtn btnText="prev" handleClick={goToPreviousPage} />
-      {pageBtns}
+      {currentPageNumber > 0 && (
+        <PageBtn btnText="prev" handleClick={goToPreviousPage} />
+      )}
+      <PageBtns maximumNumberOfBtns={5} />
       {currentPageNumber != totalNumberOfPages - 1 && (
         <PageBtn btnText="next" handleClick={goToNextPage} />
       )}

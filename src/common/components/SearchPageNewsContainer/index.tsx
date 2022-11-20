@@ -8,7 +8,13 @@ import {
   getNewsDataFromAPIResponse,
   getCommentDataFromAPIResponse,
 } from '@utils/getDataFromAPIResponse';
-import { getStartTimeInSecondsFromTimeRangeOption } from '@utils/time';
+import {
+  getSearchTextParam,
+  getSearchByParam,
+  getSearchCategoryParam,
+  getSearchTimeRangeOption,
+  getPageNumberParam,
+} from '@utils/apiUrl';
 
 import { NewsDataType } from 'types/news';
 import { CommentDataType } from 'types/comments';
@@ -30,23 +36,14 @@ const SearchPageNewsContainer = () => {
   const [newsData, setNewsData] = useState<NewsDataType[]>([]);
   const [commentsData, setCommentsData] = useState<CommentDataType[]>([]);
 
-  let API_URL = '';
-
   useEffect(() => {
-    // TODO: Modularize this
-    API_URL = `https://hn.algolia.com/api/v1/${
-      searchByOption == 'popularity' ? 'search' : 'search_by_date'
-    }?${searchText !== '' ? 'query=' + searchText + '&' : ''}${
-      searchCategory !== '' && searchCategory !== 'all'
-        ? 'tags=' + searchCategory + '&'
-        : 'tags=story&'
-    }${
-      searchTimeRangeOption !== 'all-time'
-        ? 'numericFilters=created_at_i>=' +
-          getStartTimeInSecondsFromTimeRangeOption(searchTimeRangeOption) +
-          '&'
-        : ''
-    }page=${Math.max(0, currentPageNumber)}`;
+    const API_URL =
+      'https://hn.algolia.com/api/v1/' +
+      getSearchByParam(searchByOption) +
+      getSearchTextParam(searchText) +
+      getSearchCategoryParam(searchCategory) +
+      getSearchTimeRangeOption(searchTimeRangeOption) +
+      getPageNumberParam(currentPageNumber);
 
     const fetchNewsDataFromAPI = async () => {
       const response = await fetch(API_URL);

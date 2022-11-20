@@ -4,7 +4,7 @@ import News from '@components/News';
 
 import { useNewsStore } from '@utils/store';
 import { getNewsDataFromAPIResponse } from '@utils/getDataFromAPIResponse';
-import { getCurrentTimeInSeconds } from '@utils/time';
+import { getPageNumberParam, getCurrentTimeParam } from '@utils/apiUrl';
 
 import { NewsDataType } from 'types/news';
 
@@ -18,10 +18,10 @@ const NewStoriesNewsContainer = () => {
   const [newsData, setNewsData] = useState<NewsDataType[]>([]);
 
   useEffect(() => {
-    const API_URL = `https://hn.algolia.com/api/v1/search_by_date?tags=story&numericFilters=created_at_i<=${getCurrentTimeInSeconds()}&page=${Math.max(
-      0,
-      currentPageNumber,
-    )}`;
+    const API_URL =
+      'https://hn.algolia.com/api/v1/search_by_date?tags=story&numericFilters=created_at_i<=' +
+      getCurrentTimeParam() +
+      getPageNumberParam(currentPageNumber);
 
     const fetchNewsDataFromAPI = async () => {
       const response = await fetch(API_URL);

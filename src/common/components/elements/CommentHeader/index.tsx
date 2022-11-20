@@ -19,7 +19,7 @@ const CommentHeader: FC<CommentHeaderProps> = ({ commentData }) => {
       <p>|</p>
       <p>parent</p>
       <p>|</p>
-      <p>on:</p>
+      <p>on :</p>
       <a href={story_url}>{story_title}</a>
     </div>
   );

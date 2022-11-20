@@ -8,6 +8,30 @@ export type CommentDataType = {
   story_url: string;
 };
 
+type _HighlightResultValue = {
+  value: string;
+  matchLevel: number;
+  matchedWords: string[];
+};
+
+export type APICommentDataType = {
+  title: string;
+  url: string;
+  story_text: string;
+  num_comments: number;
+  parent_id: number;
+  relevancy_score: number;
+  tags: string[];
+  _highlightResult: {
+    title: _HighlightResultValue;
+    url: _HighlightResultValue;
+    auhtor: _HighlightResultValue;
+    comment_text: _HighlightResultValue;
+    story_title: _HighlightResultValue;
+    story_url: _HighlightResultValue;
+  };
+} & CommentDataType;
+
 export type APICommentResponse = {
   hits: APICommentDataType[];
   nbHits: number;
@@ -45,27 +69,3 @@ export type APICommentResponse = {
     total: number;
   };
 };
-
-type _HighlightResultValue = {
-  value: string;
-  matchLevel: number;
-  matchedWords: string[];
-};
-
-export type APICommentDataType = {
-  title: string;
-  url: string;
-  story_text: string;
-  num_comments: number;
-  parent_id: number;
-  relevancy_score: number;
-  tags: string[];
-  _highlightResult: {
-    title: _HighlightResultValue;
-    url: _HighlightResultValue;
-    auhtor: _HighlightResultValue;
-    comment_text: _HighlightResultValue;
-    story_title: _HighlightResultValue;
-    story_url: _HighlightResultValue;
-  };
-} & CommentDataType;
