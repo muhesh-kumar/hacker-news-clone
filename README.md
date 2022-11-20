@@ -1,5 +1,24 @@
 # Hacker News Clone
 
+## Setting up the Development Environment
+
+1. Clone the repo
+1. Install dependencies `yarn`
+1. Setup precommit hooks `yarn husky install`
+1. Create a .husky/pre-commit file and fill it with the following contents
+1. ```
+   #!/usr/bin/env sh
+   . "$(dirname -- "$0")/_/husky.sh"
+
+   # yarn tsc --noEmit && yarn eslint . && yarn prettier --write .
+   yarn lint-staged
+   ```
+
+1. Make .husky/pre-commit executable `chmod +x .husky/pre-commit`
+1. Start the development server `yarn dev`
+
+1. Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
+
 ## Tech Stack
 
 - ReactJS
@@ -9,11 +28,11 @@
 
 ## Design Credits
 
-https://dribbble.com/shots/10472146-Hacker-News-Redesigned
+- https://dribbble.com/shots/10472146-Hacker-News-Redesigned
 
 ## Design
 
-https://cdn.dribbble.com/users/2969840/screenshots/10472146/media/c50908689b25c5c4c332ed10d9195516.png
+- https://cdn.dribbble.com/users/2969840/screenshots/10472146/media/c50908689b25c5c4c332ed10d9195516.png
 
 ## References
 
