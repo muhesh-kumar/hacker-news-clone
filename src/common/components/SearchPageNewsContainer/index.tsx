@@ -22,9 +22,15 @@ import { CommentDataType } from 'types/comments';
 const SearchPageNewsContainer = () => {
   const currentPageNumber = useNewsStore((state) => state.currentPageNumber);
   const totalNumberOfPages = useNewsStore((state) => state.totalNumberOfPages);
+  const setCurrentPageNumber = useNewsStore(
+    (state) => state.setCurrentPageNumber,
+  );
   const setTotalNumberOfPages = useNewsStore(
     (state) => state.setTotalNumberOfPages,
   );
+
+  // WARNING: curr page = -1 applies only to home page and not other pages
+  if (currentPageNumber == -1) setCurrentPageNumber(0);
 
   const searchText = useSearchStore((state) => state.searchText);
   const searchCategory = useSearchStore((state) => state.searchCategory);
@@ -55,7 +61,13 @@ const SearchPageNewsContainer = () => {
         setCommentsData(getCommentDataFromAPIResponse(data));
         setNewsData([]);
       } else {
-        setNewsData(getNewsDataFromAPIResponse(data));
+        setNewsData(
+          getNewsDataFromAPIResponse(
+            data,
+            currentPageNumber - 1,
+            data.hitsPerPage,
+          ),
+        );
         setCommentsData([]);
       }
     };

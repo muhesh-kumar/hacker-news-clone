@@ -11,9 +11,15 @@ import { NewsDataType } from 'types/news';
 const NewStoriesNewsContainer = () => {
   const currentPageNumber = useNewsStore((state) => state.currentPageNumber);
   const totalNumberOfPages = useNewsStore((state) => state.totalNumberOfPages);
+  const setCurrentPageNumber = useNewsStore(
+    (state) => state.setCurrentPageNumber,
+  );
   const setTotalNumberOfPages = useNewsStore(
     (state) => state.setTotalNumberOfPages,
   );
+
+  // WARNING: curr page = -1 applies only to home page and not other pages
+  if (currentPageNumber == -1) setCurrentPageNumber(0);
 
   const [newsData, setNewsData] = useState<NewsDataType[]>([]);
 
@@ -29,7 +35,14 @@ const NewStoriesNewsContainer = () => {
 
       if (currentPageNumber == 0) setTotalNumberOfPages(data.nbPages);
 
-      setNewsData(getNewsDataFromAPIResponse(data));
+      // WARNING: currentPageNumber - 1 because the same function assumes that the minimum page number is -1 (because of home page's default behaviour)
+      setNewsData(
+        getNewsDataFromAPIResponse(
+          data,
+          currentPageNumber - 1,
+          data.hitsPerPage,
+        ),
+      );
     };
 
     fetchNewsDataFromAPI();

@@ -18,11 +18,11 @@ const NewsContainer = () => {
   const [newsData, setNewsData] = useState<NewsDataType[]>([]);
 
   // All stories that are on the front/home page right now
-  if (currentPageNumber == 0)
+  if (currentPageNumber == -1)
     API_URL = 'https://hn.algolia.com/api/v1/search?tags=front_page';
 
   // Last stories (i.e., recent stories)
-  if (currentPageNumber > 0)
+  if (currentPageNumber >= 0)
     API_URL = `https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${currentPageNumber}`;
 
   useEffect(() => {
@@ -30,9 +30,17 @@ const NewsContainer = () => {
       const response = await fetch(API_URL);
       const data = await response.json();
 
-      if (currentPageNumber == 1) setTotalNumberOfPages(data.nbPages);
+      if (currentPageNumber == 0) {
+        setTotalNumberOfPages(data.nbPages);
+      }
 
-      setNewsData(getNewsDataFromAPIResponse(data));
+      setNewsData(
+        getNewsDataFromAPIResponse(
+          data,
+          currentPageNumber,
+          currentPageNumber > -1 ? data.hitsPerPage : 0,
+        ),
+      );
     };
     fetchNewsDataFromAPI();
   }, [currentPageNumber]);

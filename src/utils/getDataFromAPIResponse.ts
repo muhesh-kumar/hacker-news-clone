@@ -1,11 +1,14 @@
 import { APINewsResponse, APINewsDataType } from 'types/news';
 import { APICommentResponse, CommentDataType } from 'types/comments';
 
-export const getNewsDataFromAPIResponse = (APINews: APINewsResponse) =>
+export const getNewsDataFromAPIResponse = (
+  APINews: APINewsResponse,
+  currentPageNumber = 0,
+  entriesPerPage = 0,
+) =>
   APINews.hits.map((data: APINewsDataType, idx: number) => {
     return {
-      // FIXME: give correct id based on currentPageNumber and totalNumberOfPages
-      id: idx + 1,
+      id: (currentPageNumber + 1) * entriesPerPage + idx + 1,
       author: data.author,
       created_at: data.created_at,
       title: data.title,
