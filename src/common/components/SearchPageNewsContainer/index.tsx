@@ -8,27 +8,10 @@ import {
   getNewsDataFromAPIResponse,
   getCommentDataFromAPIResponse,
 } from '@utils/getDataFromAPIResponse';
+import { getStartTimeInSecondsFromTimeRangeOption } from '@utils/time';
 
 import { NewsDataType } from 'types/news';
 import { CommentDataType } from 'types/comments';
-
-const SECONDS_IN_A_DAY = 60 * 60 * 24;
-const SECONDS_IN_A_WEEK = 7 * SECONDS_IN_A_DAY;
-
-// FIXME: handle different number of days in each month
-const SECONDS_IN_A_MONTH = 31 * SECONDS_IN_A_DAY;
-
-// FIXME: handle leap years
-const SECONDS_IN_A_YEAR = 12 * SECONDS_IN_A_MONTH;
-
-const getStartTimeInSecondsFromTimeRangeOption = (timeRangeOption: string) => {
-  const currTime = new Date().getTime();
-  if (timeRangeOption == 'all-time') return 0;
-  if (timeRangeOption == 'last-24h') return currTime - SECONDS_IN_A_DAY;
-  if (timeRangeOption == 'past-week') return currTime - SECONDS_IN_A_WEEK;
-  if (timeRangeOption == 'past-month') return currTime - SECONDS_IN_A_MONTH;
-  if (timeRangeOption == 'past-year') return currTime - SECONDS_IN_A_YEAR;
-};
 
 const SearchPageNewsContainer = () => {
   const currentPageNumber = useNewsStore((state) => state.currentPageNumber);
@@ -50,6 +33,7 @@ const SearchPageNewsContainer = () => {
   let API_URL = '';
 
   useEffect(() => {
+    // TODO: Modularize this
     API_URL = `https://hn.algolia.com/api/v1/${
       searchByOption == 'popularity' ? 'search' : 'search_by_date'
     }?${searchText !== '' ? 'query=' + searchText + '&' : ''}${

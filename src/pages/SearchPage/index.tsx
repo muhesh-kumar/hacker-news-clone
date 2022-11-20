@@ -4,8 +4,16 @@ import SearchPageNewsContainer from '@components/SearchPageNewsContainer';
 import Pagination from '@components/Pagination';
 
 import { useSearchStore } from '@utils/store';
+import getOptionElementsFromOptionsArray from './getOptionElementsFromOptionsArray';
+
+import {
+  searchCategoryOptions,
+  searchByOptions,
+  searchTimeRangeOptions,
+} from './options';
 
 const SearchPage = () => {
+  // TODO: don't use multiple state variables to manage the state of a form, instead use an object and only one setState function
   const searchCategory = useSearchStore((state) => state.searchCategory);
   const searchByOption = useSearchStore((state) => state.searchByOption);
   const searchTimeRangeOption = useSearchStore(
@@ -38,9 +46,7 @@ const SearchPage = () => {
             value={searchCategory}
             onChange={handleChangeInSearchCategory}
           >
-            <option value="story">Stories</option>
-            <option value="comment">Comments</option>
-            <option value="all">All</option>
+            {getOptionElementsFromOptionsArray(searchCategoryOptions)}
           </select>
           <span>by</span>
           <select
@@ -48,8 +54,7 @@ const SearchPage = () => {
             value={searchByOption}
             onChange={handleChangeInSearchByOption}
           >
-            <option value="popularity">Popularity</option>
-            <option value="date">Date</option>
+            {getOptionElementsFromOptionsArray(searchByOptions)}
           </select>
           <span>for</span>
           <select
@@ -57,12 +62,7 @@ const SearchPage = () => {
             value={searchTimeRangeOption}
             onChange={handleChangeInSearchTimeRange}
           >
-            <option value="all-time">All time</option>
-            <option value="last-24h">Last 24h</option>
-            <option value="past-week">Past Week</option>
-            <option value="past-month">Past Month</option>
-            <option value="past-year">Past Year</option>
-            <option value="all-time">Custom Range</option>
+            {getOptionElementsFromOptionsArray(searchTimeRangeOptions)}
           </select>
         </form>
         <SearchPageNewsContainer />

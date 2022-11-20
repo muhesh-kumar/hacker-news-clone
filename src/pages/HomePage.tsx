@@ -1,4 +1,5 @@
 import GeneralPageLayout from '@layouts/GeneralPageLayout';
+
 import NewsContainer from '@components/NewsContainer';
 
 import LoadMoreBtn from '@elements/LoadMoreBtn';

@@ -6,6 +6,7 @@
       "@styles/*": ["styles/*"],
       "@pages/*": ["pages/*"],
       "@utils/*": ["utils/*"],
+      "@constants/*": ["constants/*"],
       "@layouts/*": ["common/layouts/*"],
       "@elements/*": ["common/components/elements/*"],
       "@components/*": ["common/components/*"],

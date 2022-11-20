@@ -1,6 +1,6 @@
 import GeneralPageLayout from '@layouts/GeneralPageLayout';
-import NewStoriesNewsContainer from '@components/NewStoriesNewsContainer';
 
+import NewStoriesNewsContainer from '@components/NewStoriesNewsContainer';
 import Pagination from '@components/Pagination';
 
 const NewStoriesPage = () => {
