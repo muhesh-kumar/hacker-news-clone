@@ -19,6 +19,13 @@
 
 1. Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
 
+## Future Work
+
+- Add Loading Animation
+- Add Authentication
+- Add Responsiveness
+- Implement all the features present in the original Hacker News website
+
 ## Tech Stack
 
 - ReactJS
