@@ -55,7 +55,7 @@ export const getTimeElapsedSinceNewsIsPosed = (created_at: string) => {
 export const getStartTimeInSecondsFromTimeRangeOption = (
   timeRangeOption: string,
 ) => {
-  const currTime = new Date().getTime();
+  const currTime = new Date().getTime() / 1000;
 
   switch (timeRangeOption) {
     case 'all-time':

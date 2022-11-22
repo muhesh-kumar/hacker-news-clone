@@ -18,9 +18,6 @@ export const getSearchCategoryParam = (searchCategory: string) => {
       return `tags=${searchCategory}&`;
   }
 };
-// searchCategory !== '' && searchCategory !== 'all'
-//   ? 'tags=' + searchCategory + '&'
-//   : 'tags=story&';
 
 export const getSearchTimeRangeOption = (searchTimeRangeOption: string) =>
   searchTimeRangeOption !== 'all-time'
