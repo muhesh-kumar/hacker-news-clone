@@ -99,11 +99,6 @@ const SearchPageNewsContainer = () => {
         setCommentsData([]);
         if (searchCategory === 'all') setNewsData([]);
       }
-
-      console.log(searchCategory, API_URL);
-      console.log('News: ', newsData);
-      console.log('Comment: ', commentsData);
-      console.log('News and Comment: ', newsAndCommentsData);
     };
 
     fetchDataFromAPI();

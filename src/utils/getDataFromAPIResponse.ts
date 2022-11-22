@@ -38,7 +38,6 @@ export const getNewsAndCommentDataFromAPIResponse = (
   entriesPerPage = 0,
 ) =>
   APIResponse.map((data: NewsAndCommentDataType, idx: number) => {
-    console.log(idx, data.comment_text);
     return data.comment_text !== null
       ? {
           story_id: data.story_id,
@@ -64,8 +63,7 @@ export const getNewsAndCommentDataFromAPIResponse = (
 
 export const getNewsDataFromNewsAndCommentData = (
   newsAndCommentData: NewsAndCommentDataType,
-): NewsDataType => {
-  console.log('news side', newsAndCommentData);
+) => {
   return {
     id: newsAndCommentData.id ?? 0,
     created_at: newsAndCommentData.created_at ?? '',
@@ -80,7 +78,6 @@ export const getNewsDataFromNewsAndCommentData = (
 export const getCommentDataFromNewsAndCommentData = (
   newsAndCommentData: NewsAndCommentDataType,
 ) => {
-  console.log('comment side', newsAndCommentData);
   return {
     story_id: newsAndCommentData.story_id ?? 0,
     author: newsAndCommentData.author ?? '',
