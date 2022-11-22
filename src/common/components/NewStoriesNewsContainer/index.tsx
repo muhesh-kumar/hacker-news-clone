@@ -38,7 +38,7 @@ const NewStoriesNewsContainer = () => {
       // WARNING: currentPageNumber - 1 because the same function assumes that the minimum page number is -1 (because of home page's default behaviour)
       setNewsData(
         getNewsDataFromAPIResponse(
-          data,
+          data.hits,
           currentPageNumber - 1,
           data.hitsPerPage,
         ),

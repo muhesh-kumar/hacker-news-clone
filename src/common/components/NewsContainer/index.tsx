@@ -36,7 +36,7 @@ const NewsContainer = () => {
 
       setNewsData(
         getNewsDataFromAPIResponse(
-          data,
+          data.hits,
           currentPageNumber,
           currentPageNumber > -1 ? data.hitsPerPage : 0,
         ),
