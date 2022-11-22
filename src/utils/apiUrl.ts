@@ -9,10 +9,18 @@ export const getSearchTextParam = (searchText: string) =>
 export const getSearchByParam = (searchByOption: string) =>
   searchByOption == 'popularity' ? 'search?' : 'search_by_date?';
 
-export const getSearchCategoryParam = (searchCategory: string) =>
-  searchCategory !== '' && searchCategory !== 'all'
-    ? 'tags=' + searchCategory + '&'
-    : 'tags=story&';
+export const getSearchCategoryParam = (searchCategory: string) => {
+  switch (searchCategory) {
+    case '':
+    case 'all':
+      return '';
+    default:
+      return `tags=${searchCategory}&`;
+  }
+};
+// searchCategory !== '' && searchCategory !== 'all'
+//   ? 'tags=' + searchCategory + '&'
+//   : 'tags=story&';
 
 export const getSearchTimeRangeOption = (searchTimeRangeOption: string) =>
   searchTimeRangeOption !== 'all-time'

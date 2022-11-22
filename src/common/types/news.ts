@@ -20,26 +20,3 @@ export type APINewsDataType = {
   num_comments: number;
   children: APINewsDataType[];
 };
-
-export type APINewsResponse = {
-  hits: APINewsDataType[];
-  nbHits: number;
-  nbPages: number;
-  page: number;
-  hitsPerPage: number;
-  exhaustiveNbHits: boolean;
-  exhaustiveTypo: boolean;
-  exhaustive: {
-    nbHits: boolean;
-    typo: boolean;
-  };
-  query: string;
-  params: string;
-  processingTimeMS: number;
-  processingTimingsMS: {
-    afterFetch: {
-      total: number;
-    };
-    total: number;
-  };
-};

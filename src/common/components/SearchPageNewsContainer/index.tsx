@@ -7,6 +7,9 @@ import { useNewsStore, useSearchStore } from '@utils/store';
 import {
   getNewsDataFromAPIResponse,
   getCommentDataFromAPIResponse,
+  getNewsAndCommentDataFromAPIResponse,
+  getNewsDataFromNewsAndCommentData,
+  getCommentDataFromNewsAndCommentData,
 } from '@utils/getDataFromAPIResponse';
 import {
   getSearchTextParam,
@@ -18,6 +21,7 @@ import {
 
 import { NewsDataType } from 'types/news';
 import { CommentDataType } from 'types/comments';
+import { NewsAndCommentDataType } from 'types/newsAndComments';
 
 const SearchPageNewsContainer = () => {
   const currentPageNumber = useNewsStore((state) => state.currentPageNumber);
@@ -41,6 +45,9 @@ const SearchPageNewsContainer = () => {
 
   const [newsData, setNewsData] = useState<NewsDataType[]>([]);
   const [commentsData, setCommentsData] = useState<CommentDataType[]>([]);
+  const [newsAndCommentsData, setNewsAndCommentsData] = useState<
+    NewsAndCommentDataType[]
+  >([]);
 
   useEffect(() => {
     const API_URL =
@@ -51,28 +58,55 @@ const SearchPageNewsContainer = () => {
       getSearchTimeRangeOption(searchTimeRangeOption) +
       getPageNumberParam(currentPageNumber);
 
-    const fetchNewsDataFromAPI = async () => {
+    const fetchDataFromAPI = async () => {
       const response = await fetch(API_URL);
       const data = await response.json();
 
       if (currentPageNumber == 0) setTotalNumberOfPages(data.nbPages);
 
-      if (searchCategory === 'comment') {
-        setCommentsData(getCommentDataFromAPIResponse(data));
+      if (searchCategory === 'comment' || searchCategory === 'all') {
+        if (searchCategory === 'comment')
+          setCommentsData(getCommentDataFromAPIResponse(data.hits));
+        else
+          setNewsAndCommentsData(
+            getNewsAndCommentDataFromAPIResponse(
+              data.hits,
+              currentPageNumber - 1,
+              data.entriesPerPage,
+            ),
+          );
+
         setNewsData([]);
+        if (searchCategory === 'all') setCommentsData([]);
       } else {
-        setNewsData(
-          getNewsDataFromAPIResponse(
-            data,
-            currentPageNumber - 1,
-            data.hitsPerPage,
-          ),
-        );
+        if (searchCategory === 'story')
+          setNewsData(
+            getNewsDataFromAPIResponse(
+              data.hits,
+              currentPageNumber - 1,
+              data.hitsPerPage,
+            ),
+          );
+        else
+          setNewsAndCommentsData(
+            getNewsAndCommentDataFromAPIResponse(
+              data.hits,
+              currentPageNumber - 1,
+              data.entriesPerPage,
+            ),
+          );
+
         setCommentsData([]);
+        if (searchCategory === 'all') setNewsData([]);
       }
+
+      console.log(searchCategory, API_URL);
+      console.log('News: ', newsData);
+      console.log('Comment: ', commentsData);
+      console.log('News and Comment: ', newsAndCommentsData);
     };
 
-    fetchNewsDataFromAPI();
+    fetchDataFromAPI();
   }, [
     currentPageNumber,
     totalNumberOfPages,
@@ -92,6 +126,23 @@ const SearchPageNewsContainer = () => {
         commentsData.map((comment: CommentDataType, idx: number) => (
           <Comment key={idx} commentData={comment} />
         ))}
+      {newsAndCommentsData &&
+        newsAndCommentsData.map(
+          (newsAndComment: NewsAndCommentDataType, idx: number) =>
+            newsAndComment.isComment ? (
+              <Comment
+                key={idx}
+                commentData={getCommentDataFromNewsAndCommentData(
+                  newsAndComment,
+                )}
+              />
+            ) : (
+              <News
+                key={newsAndComment.id}
+                newsData={getNewsDataFromNewsAndCommentData(newsAndComment)}
+              />
+            ),
+        )}
     </div>
   );
 };
