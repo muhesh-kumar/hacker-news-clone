@@ -11,17 +11,16 @@ import {
   getNewsDataFromNewsAndCommentData,
   getCommentDataFromNewsAndCommentData,
 } from '@utils/getDataFromAPIResponse';
-import {
-  getSearchTextParam,
-  getSearchByParam,
-  getSearchCategoryParam,
-  getSearchTimeRangeOption,
-  getPageNumberParam,
-} from '@utils/apiUrl';
+
+import ApiUrlBuilder from '@utils/api-url/ApiUrlBuilder';
+import ApiUrlDirector from '@utils/api-url/ApiUrlDirector';
 
 import { NewsDataType } from 'types/news';
 import { CommentDataType } from 'types/comments';
 import { NewsAndCommentDataType } from 'types/newsAndComments';
+
+const builder = new ApiUrlBuilder();
+const director = new ApiUrlDirector(builder);
 
 const SearchPageNewsContainer = () => {
   const currentPageNumber = useNewsStore((state) => state.currentPageNumber);
@@ -50,13 +49,16 @@ const SearchPageNewsContainer = () => {
   >([]);
 
   useEffect(() => {
-    const API_URL =
-      'https://hn.algolia.com/api/v1/' +
-      getSearchByParam(searchByOption) +
-      getSearchTextParam(searchText) +
-      getSearchCategoryParam(searchCategory) +
-      getSearchTimeRangeOption(searchTimeRangeOption) +
-      getPageNumberParam(currentPageNumber);
+    director.constructSearchPageApiUrl(searchByOption, searchText, searchCategory, searchTimeRangeOption, currentPageNumber);
+    const API_URL = builder.build();
+    console.log(API_URL);
+    // const API_URL =
+    //   'https://hn.algolia.com/api/v1/' +
+    //   getSearchByParam(searchByOption) +
+    //   getSearchTextParam(searchText) +
+    //   getSearchCategoryParam(searchCategory) +
+    //   getSearchTimeRangeOption(searchTimeRangeOption) +
+    //   getPageNumberParam(currentPageNumber);
 
     const fetchDataFromAPI = async () => {
       const response = await fetch(API_URL);

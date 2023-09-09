@@ -4,10 +4,14 @@ import News from '@components/News';
 
 import { useNewsStore } from '@utils/store';
 import { getNewsDataFromAPIResponse } from '@utils/getDataFromAPIResponse';
+import ApiUrlBuilder from '@utils/api-url/ApiUrlBuilder';
+import ApiUrlDirector from '@utils/api-url/ApiUrlDirector';
 
 import { NewsDataType } from 'types/news';
 
 let API_URL = '';
+const builder = new ApiUrlBuilder();
+const director = new ApiUrlDirector(builder);
 
 const NewsContainer = () => {
   const currentPageNumber = useNewsStore((state) => state.currentPageNumber);
@@ -18,12 +22,20 @@ const NewsContainer = () => {
   const [newsData, setNewsData] = useState<NewsDataType[]>([]);
 
   // All stories that are on the front/home page right now
-  if (currentPageNumber == -1)
-    API_URL = 'https://hn.algolia.com/api/v1/search?tags=front_page';
+  if (currentPageNumber == -1) {
+    director.constructFrontPageApiUrl();
+    API_URL = builder.build();
+    // API_URL = 'https://hn.algolia.com/api/v1/search?tags=front_page';
+  }
 
   // Last stories (i.e., recent stories)
-  if (currentPageNumber >= 0)
-    API_URL = `https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${currentPageNumber}`;
+  if (currentPageNumber >= 0) {
+    director.constructRecentStoriesApiUrl(currentPageNumber);
+    API_URL = builder.build();
+    // API_URL = `https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${currentPageNumber}`;
+  }
+
+  console.log(API_URL);
 
   useEffect(() => {
     const fetchNewsDataFromAPI = async () => {

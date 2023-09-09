@@ -4,7 +4,7 @@ import {
 } from '@utils/time';
 
 export const getSearchTextParam = (searchText: string) =>
-  searchText !== '' ? 'query=' + searchText + '&' : '';
+  searchText && searchText !== '' ? 'query=' + searchText + '&' : '';
 
 export const getSearchByParam = (searchByOption: string) =>
   searchByOption == 'popularity' ? 'search?' : 'search_by_date?';
@@ -15,12 +15,12 @@ export const getSearchCategoryParam = (searchCategory: string) => {
     case 'all':
       return '';
     default:
-      return `tags=${searchCategory}&`;
+      return searchCategory ? `tags=${searchCategory}&` : '';
   }
 };
 
 export const getSearchTimeRangeOption = (searchTimeRangeOption: string) =>
-  searchTimeRangeOption !== 'all-time'
+  searchTimeRangeOption && searchTimeRangeOption !== 'all-time'
     ? 'numericFilters=created_at_i>=' +
       getStartTimeInSecondsFromTimeRangeOption(searchTimeRangeOption) +
       '&'
@@ -29,4 +29,6 @@ export const getSearchTimeRangeOption = (searchTimeRangeOption: string) =>
 export const getPageNumberParam = (currentPageNumber: number) =>
   'page=' + Math.max(0, currentPageNumber);
 
-export const getCurrentTimeParam = () => getCurrentTimeInSeconds() + '&';
+export const getCurrentTimeParam = (shouldGetCurrentTimeParam: boolean) =>
+  shouldGetCurrentTimeParam &&
+  'numericFilters=created_at_i<=' + getCurrentTimeInSeconds() + '&';

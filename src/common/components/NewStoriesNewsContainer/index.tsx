@@ -4,9 +4,13 @@ import News from '@components/News';
 
 import { useNewsStore } from '@utils/store';
 import { getNewsDataFromAPIResponse } from '@utils/getDataFromAPIResponse';
-import { getPageNumberParam, getCurrentTimeParam } from '@utils/apiUrl';
+import ApiUrlBuilder from '@utils/api-url/ApiUrlBuilder';
+import ApiUrlDirector from '@utils/api-url/ApiUrlDirector';
 
 import { NewsDataType } from 'types/news';
+
+const builder = new ApiUrlBuilder();
+const director = new ApiUrlDirector(builder);
 
 const NewStoriesNewsContainer = () => {
   const currentPageNumber = useNewsStore((state) => state.currentPageNumber);
@@ -24,10 +28,8 @@ const NewStoriesNewsContainer = () => {
   const [newsData, setNewsData] = useState<NewsDataType[]>([]);
 
   useEffect(() => {
-    const API_URL =
-      'https://hn.algolia.com/api/v1/search_by_date?tags=story&numericFilters=created_at_i<=' +
-      getCurrentTimeParam() +
-      getPageNumberParam(currentPageNumber);
+    director.constructNewStoriesApiUrl(currentPageNumber);
+    const API_URL = builder.build();
 
     const fetchNewsDataFromAPI = async () => {
       const response = await fetch(API_URL);
